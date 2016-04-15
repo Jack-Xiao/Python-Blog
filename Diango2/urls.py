@@ -17,6 +17,7 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
+from App.views import RSSFeed
 
 urlpatterns = [
     # Examples:
@@ -25,8 +26,10 @@ urlpatterns = [
 
     url(r'^admin/', include(admin.site.urls)), #可以使用设置好的url 进入网站后台
     url(r'^$', 'App.views.home'), #由于目前只有一个app, 方便起见, 就不设置include了
-    url(r'^(?P<my_args>\d+)/$','App.views.detail',name='detail'),
+
     url(r'^test/$','App.views.test'),
 
-    url(r'$','App.views.home'),
+    url(r'$','App.views.home',name='home'),
+    url(r'^(?P<id>\d+)/$','App.views.detail',name='detail'),
+    url(r'^feed/$',RSSFeed(),name = "RSS"),
 ]
